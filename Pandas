@@ -1,0 +1,80 @@
+import pandas as pd
+import numpy as np
+print("Creating series")
+
+a=np.array(['s','e','r','i','e','s'])
+b=pd.Series(a)
+print(b)
+c=pd.Series(a,index=['a','b','c','d','e','f'])
+print(c)
+print("Slicing")
+print(c[1:5])
+print("Finding item of a location")
+print(b.loc[4])
+print("Finding item from reverse index ")
+print(b.iloc[3])
+print("Creating a data frame")
+df=pd.DataFrame()
+print("Createas empty data frame", df)
+f={'chem':[67,96,69],'phy':[99,68,97],'mat':[55,96,57]}
+df=pd.DataFrame(f,index=['a','b','c'])
+print(df)
+print("Adding another row")
+df['Tot']=df['chem']+df['phy']+df['mat']
+print(df)
+print("Sorting")
+print(df.sort_values(by='phy'))
+print("Dropping Tables")
+print(df.drop(columns='Tot'))
+
+
+
+!--output---!
+Creating series
+0 s
+1 e
+2 r
+3 i
+4 e
+5 s
+dtype: object
+a s
+b e
+c r
+d i
+e e
+f s
+dtype: object
+Slicing
+b e
+c r
+d i
+e e
+dtype: object
+Finding item of a location
+e
+Finding item from reverse index
+i
+Creating a data frame
+Createas empty data frame Empty DataFrame
+Columns: []
+Index: []
+chem phy mat
+a 67 99 55
+b 96 68 96
+c 69 97 57
+Adding another row
+chem phy mat Tot
+a 67 99 55 221
+b 96 68 96 260
+c 69 97 57 223
+Sorting
+chem phy mat Tot
+b 96 68 96 260
+c 69 97 57 223
+a 67 99 55 221
+Dropping Tables
+chem phy mat
+a 67 99 55
+b 96 68 96
+c 69 97 57
