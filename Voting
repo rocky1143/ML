@@ -1,0 +1,32 @@
+
+from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+estimators = [
+    ('LR', LogisticRegression(solver='lbfgs', multi_class='multinomial', max_iter=200)),
+    ('SVC', SVC(gamma='auto', probability=True)),
+    ('DTC', DecisionTreeClassifier())
+]
+
+vot_hard = VotingClassifier(estimators=estimators, voting='hard')
+vot_hard.fit(X_train, y_train)
+y_pred_hard = vot_hard.predict(X_test)
+score_hard = accuracy_score(y_test, y_pred_hard)
+print("Hard Voting Score: %.2f" % score_hard)
+
+vot_soft = VotingClassifier(estimators=estimators, voting='soft')
+vot_soft.fit(X_train, y_train)
+y_pred_soft = vot_soft.predict(X_test)
+score_soft = accuracy_score(y_test, y_pred_soft)
+print("Soft Voting Score: %.2f" % score_soft)
+     
