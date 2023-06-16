@@ -1,0 +1,54 @@
+from sklearn.datasets import load_iris
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+# Load the iris dataset
+iris = load_iris()
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3)
+# Train a Gaussian Naive Bayes classifier on the training set
+gnb = GaussianNB()
+gnb.fit(X_train, y_train)
+# Predict the classes of the testing set using the trained classifier
+y_pred = gnb.predict(X_test)
+# Compute the accuracy of the classifier on the testing set
+accuracy = accuracy_score(y_test, y_pred)
+# Print the accuracy of the classifier
+print("Accuracy:", accuracy)
+import pandas as pd
+# create the dataset as a pandas DataFrame
+data = {'Outlook': ['Rainy', 'Sunny', 'Overcast', 'Overcast', 'Sunny', 'Rainy', 'Sunny', 'Overcast', 'Rainy', 'Sunny', 'Sunny
+'Play': ['Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes']} df = pd.DataFrame(data)
+# calculate the probability of playing given the weather conditions
+total_rows = df.shape[0]
+total_play = df[df['Play'] == 'Yes'].shape[0]
+total_not_play = df[df['Play'] == 'No'].shape[0]
+total_sunny = df[df['Outlook'] == 'Sunny'].shape[0]
+prob_play = total_play / total_rows
+prob_not_play = total_not_play / total_rows
+prob_sunny = total_sunny / total_rows
+prob_play_given_sunny = (df[(df['Outlook'] == 'Sunny') & (df['Play'] == 'Yes')].shape[0]) / total_sunny
+prob_not_play_given_sunny = (df[(df['Outlook'] == 'Sunny') & (df['Play'] == 'No')].shape[0]) / total_sunny
+# print the probabilities of playing and not playing given the weather conditions
+print(f"Probability of playing on a sunny day: {prob_play_given_sunny:.2f}")
+print(f"Probability of not playing on a sunny day: {prob_not_play_given_sunny:.2f}")
+# check if the boy can play golf given the weather conditions using probability
+can_play_golf = prob_play_given_sunny / prob_play
+cannot_play_golf = prob_not_play_given_sunny / prob_not_play
+# check if the probability of playing is greater than the probability of not playing
+if can_play_golf > cannot_play_golf:
+  print("The boy can play golf on a sunny day!")
+else:
+  print("The boy cannot play golf on a sunny day.")
+
+
+
+
+Output----
+Output:
+Accuracy: 0.9333333333333333
+Probability of playing on a sunny day: 0.60
+Probability of not playing on a sunny day: 0.40
+The boy can play golf on a sunny day.
+
+
