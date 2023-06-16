@@ -1,0 +1,65 @@
+import numpy as np
+import pandas as pd
+from sklearn.datasets import load_iris
+#Load the Iris Dataset
+iris_data=load_iris()
+# Have a glance at the features
+iris_data.data
+#Have a glance at the targets
+iris_data.target
+#Build the model
+from sklearn.cluster import KMeans
+#set the number of clusters
+kmeans=KMeans(n_clusters=3)
+#Fit the features into the model
+kmodel=kmeans.fit(iris_data.data)
+#Predict and label the data
+kmodel1=kmeans.predict(iris_data.data)
+kmodel1
+#Have a look at the cluster centers
+kmodel.cluster_centers_
+#Evaluate the algorithm
+import pandas as pd
+pd.crosstab(iris_data.target,kmodel.labels_)
+
+
+
+----output---
+
+#Have a look at the cluster centers
+kmodel.cluster_centers_
+array([[5.9016129 , 2.7483871 , 4.39354839, 1.43387097],
+       [5.006     , 3.428     , 1.462     , 0.246     ],
+       [6.85      , 3.07368421, 5.74210526, 2.07105263]])
+ 
+col_0	0	1	2
+row_0			
+0	0	50	0
+1	48	0	2
+2	14	0	36
+
+
+
+
+
+
+
+
+
+
+
+
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+Data = {'x':[25,34,22,27,33,33,31,22,35,34,67,54,57,43,50,57,59,52,65,47,49,48,35,33,44,45,38,43,51,46], 
+        'y':[79,51,53,78,59,74,73,57,69,75,51,32,40,47,53,36,35,58,59,50,25,20,14,12,20,5,29,27,8,7]
+       }
+df = DataFrame(Data,columns=['x','y'])
+  
+kmeans = KMeans(n_clusters=3).fit(df)
+centroids = kmeans.cluster_centers_
+print(centroids)
+
+plt.scatter(df['x'], df['y'], c= kmeans.labels_.astype(float))
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red');
