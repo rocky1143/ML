@@ -1,0 +1,63 @@
+import numpy as np
+print("Creating an Array")
+a = np.array([[1,2,3],[3,4,5]])
+print(a)
+print("zeros()--->Method used to give dimensions to fill the array with zeroes")
+b=np.zeros((3,4))
+print(b)
+print("arange()--->Used to create an sequence of numbers ")
+c=np.arange(2,10,3)
+print(c)
+print("linspace()--->Create an array with evenly spaced values with in the give interval")
+d=np.linspace(0,5,2)
+print(d)
+print("flatten()--->The given array will be collapsed into dimension")
+e=np.array([[11,12,13],[14,15,16]])
+f=e.flatten()
+print(f)
+print("reshape()--->Used for reshaping the aray as you want")
+g=e.reshape(3,2)
+print(g)
+print("Slicing")
+arr=np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
+print("Ex: arr[:x,::y]---> prints first x rows with y alternate values")
+temp=arr[:2,::3]
+print(temp)
+print("Sorting")
+a=np.array([[1,23,12,9],[45,3,6,89],[14,16,13,18]])
+b=np.sort(a,axis=None)
+print(b)
+b=np.sort(a,axis=1)
+print(b)
+
+
+
+
+!-----OUTPUT-----!
+
+Creating an Array
+[[1 2 3]
+[3 4 5]]
+zeros()--->Method used to give dimensions to fill the array with zeroes
+[[0. 0. 0. 0.]
+[0. 0. 0. 0.]
+[0. 0. 0. 0.]]
+arange()--->Used to create an sequence of numbers
+[2 5 8]
+linspace()--->Create an array with evenly spaced values with in the give interval
+[0. 5.]
+flatten()--->The given array will be collapsed into dimension
+[11 12 13 14 15 16]
+reshape()--->Used for reshaping the aray as you want
+[[11 12]
+[13 14]
+[15 16]]
+Slicing
+Ex: arr[:x,::y]---> prints first x rows with y alternate values
+[[1 4]
+[5 8]]
+Sorting
+[ 1 3 6 9 12 13 14 16 18 23 45 89]
+[[ 1 9 12 23]
+[ 3 6 45 89]
+[13 14 16 18]]
