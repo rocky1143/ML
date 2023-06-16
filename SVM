@@ -1,0 +1,73 @@
+import numpy as np
+from sklearn import datasets
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import LinearSVC
+
+iris = datasets.load_iris()
+X = iris["data"][:, (2, 3)]  # petal length, petal width
+y = (iris["target"] == 2).astype(np.float64)  # Iris-Virginica
+print(y)
+svm_clf = Pipeline([
+        ("scaler", StandardScaler()),
+        ("linear_svc", LinearSVC(C=1, loss="hinge", random_state=42)),
+    ])
+
+svm_clf.fit(X, y)
+svm_clf.predict([[1.5,2.7]])
+z=svm_clf.predict(X)
+import pandas as pd
+df=pd.DataFrame(z,columns=["predicted values"])
+
+df
+df1=pd.DataFrame(y,columns=["Actual"])
+df1
+Result=pd.concat([df,df1],axis=1, join='inner')
+Result
+
+
+
+
+
+---output----
+
+Actual
+0	0.0
+1	0.0
+2	0.0
+3	0.0
+4	0.0
+...	...
+145	1.0
+146	1.0
+147	1.0
+148	1.0
+149	1.0
+150 rows × 1 columns
+
+Actual
+0	0.0
+1	0.0
+2	0.0
+3	0.0
+4	0.0
+...	...
+145	1.0
+146	1.0
+147	1.0
+148	1.0
+149	1.0
+150 rows × 1 columns
+
+	predicted values	Actual
+0	0.0	0.0
+1	0.0	0.0
+2	0.0	0.0
+3	0.0	0.0
+4	0.0	0.0
+...	...	...
+145	1.0	1.0
+146	1.0	1.0
+147	1.0	1.0
+148	1.0	1.0
+149	1.0	1.0
