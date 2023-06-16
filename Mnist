@@ -1,0 +1,50 @@
+from sklearn.datasets import load_digits
+from sklearn.linear_model import SGDClassifier
+import matplotlib.pyplot as plt
+%matplotlib inline
+#Load digits and check train (data) and test (target) data available
+mnist_datasets = load_digits()
+mnist_datasets.keys()
+#Copy data to training and target to test variable
+X_data, y_data  = mnist_datasets['data'], mnist_datasets['target']
+#Check X training data shape
+X_data.shape
+#Check y test data shape
+y_data.shape
+#Let's print first digit (if you want to print other digits, just array number) for our prediction
+first_digit = X_data[1]
+first_digit_image = first_digit.reshape(8, 8)
+plt.imshow(first_digit_image)
+plt.axis("off")
+plt.show()
+#Split training and test data
+X_train_data, X_test_data, y_train_data, y_test_data = X_data[:1600], X_data[1600:], y_data[:1600], y_data[1600:]
+#Check X training data shape
+X_train_data.shape
+#Check X test data shape
+X_test_data.shape
+#Check y training data shape
+y_train_data.shape
+#Check y test data shape
+y_test_data.shape
+#The number 1 is a binay cllassifier,so let's change true for all  1 and false for all not 1 
+y_predict_digit = (y_train_data == 1)
+# Use Stochastic Gradient Descent(SGD) classifier for fit and prediction
+sgd_classifier = SGDClassifier(random_state=42)
+sgd_classifier.fit(X_train_data, y_predict_digit)
+#Predict using  Stochastic Gradient Descent(SGD) classifier
+sgd_classifier.predict([first_digit])
+
+
+
+
+-----output----
+dict_keys(['data', 'target', 'frame', 'feature_names', 'target_names', 'images', 'DESCR'])
+(1797, 64)
+(1797,)
+(1600, 64)
+(197, 64)
+(1600,)
+(197,)
+SGDClassifier(random_state=42)
+array([ True])
